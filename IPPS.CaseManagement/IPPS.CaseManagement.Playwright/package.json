@@ -1,0 +1,30 @@
+{
+  "name": "ipps.casemanagement.playwright",
+  "version": "1.0.0",
+  "description": "Playwright tests are used to test the UI of Model Driven Apps.",
+  "main": "index.js",  
+  "scripts": {
+    "test:e2e": "playwright test --project=dev",
+    "test:e2e:headed": "playwright test --headed --project=dev",
+    "test:e2e:report": "playwright show-report",
+    "test:e2e:smoke": "playwright test --project=smoke",
+    "test:e2e:regression": "playwright test --project=regression",
+    "test:e2e:full": "playwright test --project=full",
+    "regen": "npx dataverse-gen@2",
+    "regen:auth": "npx dataverse-auth@2 org5ee27481.crm4.dynamics.com"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.2",
+    "@types/xrm": "^9.0.97"
+  },
+  "dependencies": {
+    "@azure/identity": "^4.13.3",
+    "dataverse-ify": "^2.0.8",
+    "dotenv": "^18.0.2",
+    "dynamics-web-api": "^2.5.0"
+  }
+}

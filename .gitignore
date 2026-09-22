@@ -556,5 +556,3 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
-IPPS.CaseManagement/IPPS.CaseManagement.WebResources/tools/spkl/libs/
-IPPS.CaseManagement/IPPS.CaseManagement.WebResources/ipps_/casemanagement/js/
