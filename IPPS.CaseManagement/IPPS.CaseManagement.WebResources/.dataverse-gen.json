@@ -1,0 +1,14 @@
+{
+  "entities": [
+    "account",
+    "contact",
+    "ipps_case"
+  ],
+  "actions": [],
+  "functions": [],
+  "output": {
+    "outputRoot": "./src/types"
+  },
+  "generateFormContext": false,
+  "generateEntityTypes": true
+}

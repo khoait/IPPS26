@@ -1,0 +1,36 @@
+{
+  "webresources": [
+    {
+      "profile": "default,debug",
+      "root": "",
+      "solution": "IPPS2026Demo",
+      "files": [
+        {
+          "uniquename": "ipps_/casemanagement/js/CaseLibrary.js",
+          "displayname": "ipps_/casemanagement/js/CaseLibrary.js",
+          "file": "./ipps_/casemanagement/js/CaseLibrary.js"
+        }
+      ]
+    }
+  ],
+  "solutions": [
+    {
+      "profile": "default,debug",
+      "solution_uniquename": "IPPS2026Demo",
+      "packagepath": "package",
+      "solutionpath": "ipps_{0}_{1}_{2}_{3}.zip",
+      "packagetype": "unmanaged",
+      "increment_on_import": false,
+      "map": [
+        {
+          "map": "path",
+          "from": "WebResources/**/*.*",
+          "to": "./ipps_/casemanagement/**"
+        }
+      ],
+      "clobber": true,
+      "allowwrite": true,
+      "allowdelete": false
+    }
+  ]
+}

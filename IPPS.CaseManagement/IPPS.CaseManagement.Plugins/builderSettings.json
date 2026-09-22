@@ -1,0 +1,22 @@
+{
+  "suppressINotifyPattern": false,
+  "suppressGeneratedCodeAttribute": false,
+  "language": "CS",
+  "namespace": "IPPS.CaseManagement.Models",
+  "serviceContextName": "DataverseServiceContext",
+  "generateActions": true,
+  "generateGlobalOptionSets": false,
+  "emitFieldsClasses": true,
+  "entityTypesFolder": "Entities",
+  "messagesTypesFolder": "Messages",
+  "optionSetsTypesFolder": "OptionSets",
+  "entityNamesFilter": [
+    "account",
+    "contact",
+    "ipps_case",
+    "ipps_customconfiguration"
+  ],
+  "messageNamesFilter": [
+    "ipps_*"
+  ]
+}

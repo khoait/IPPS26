@@ -1,0 +1,25 @@
+{
+  "name": "ipps.casemanagement.webresources",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --mode production",
+    "build:watch": "vite build --watch --mode development",
+    "preview": "vite preview",
+    "deploy": "tools\\spkl\\deploy-webresources.bat",
+    "regen": "npx dataverse-gen@2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "@types/node": "^22.20.3",
+    "@types/xrm": "^9.0.97",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0"
+  }
+}
