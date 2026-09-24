@@ -1,0 +1,68 @@
+{
+  "folders": [
+    {
+      "path": "IPPS.CaseManagement.Playwright",
+    },
+    {
+      "path": "IPPS.CaseManagement.Plugins",
+    },
+    {
+      "path": "IPPS.CaseManagement.WebResources",
+    },
+  ],
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "IPPS Plugins: Regen Models",
+        "group": "build",
+        "type": "shell",
+        "command": "pac modelbuilder build --settingsTemplateFile \"${workspaceFolder}/IPPS.CaseManagement.Plugins/builderSettings.json\" --environment https://org5ee27481.crm4.dynamics.com --outdirectory \"${workspaceFolder}/IPPS.CaseManagement.Plugins/Models\"",
+      },
+      {
+        "label": "IPPS Plugins: Build",
+        "command": "dotnet",
+        "type": "shell",
+        "args": [
+          "build",
+          "${workspaceFolder}/IPPS.CaseManagement.Plugins/",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary",
+        ],
+        "group": "build",
+        "presentation": {
+          "reveal": "silent",
+        },
+        "problemMatcher": "$msCompile",
+      },
+    ],
+  },
+  "settings": {
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.codeActionsOnSave": {
+      "quickfix.biome": "explicit",
+      "source.organizeImports.biome": "explicit",
+      "source.fixAll.biome": "explicit"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "biomejs.biome",
+      "editor.formatOnSave": true,      
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "biomejs.biome",
+      "editor.formatOnSave": true
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "biomejs.biome",
+      "editor.formatOnSave": true,            
+    },
+    "[json]": {
+      "editor.defaultFormatter": "biomejs.biome",
+      "editor.formatOnSave": true,      
+    },
+    "prettier.enable": false,
+    "eslint.enable": false,
+  },
+}
