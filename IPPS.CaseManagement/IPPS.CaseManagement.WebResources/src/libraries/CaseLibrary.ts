@@ -5,5 +5,6 @@ window.IPPS ??= {
   CaseManagement: {},
 };
 
-window.IPPS.CaseManagement.CaseForm = CaseForm;
-window.IPPS.CaseManagement.CaseRibbon = CaseRibbon;
+window.IPPS.CaseManagement.CaseLibrary ??= {};
+window.IPPS.CaseManagement.CaseLibrary.CaseForm = CaseForm;
+window.IPPS.CaseManagement.CaseLibrary.CaseRibbon = CaseRibbon;

@@ -15,5 +15,3 @@ if errorlevel 1 (
 echo Error Code=%errorlevel%
 exit /b %errorlevel%
 )
-
-pause
