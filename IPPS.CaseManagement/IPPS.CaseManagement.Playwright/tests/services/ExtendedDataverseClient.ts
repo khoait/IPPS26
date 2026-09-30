@@ -1,52 +1,52 @@
 import {
-  DataverseClient,
-  IEntity,
-  Guid,
-  EntityCollection,
-  WebApiExecuteRequest,
-  EntityReference,
+  type DataverseClient,
+  type EntityCollection,
+  type EntityReference,
+  type Guid,
+  getMetadataByLogicalName,
+  type IEntity,
   odataify,
   setMetadataCache,
   toEntityReference,
-  getMetadataByLogicalName,
+  type WebApiExecuteRequest,
 } from "dataverse-ify";
-import {
+import type {
   FetchRetrieveMultipleOptions,
   ODataRetrieveMultipleOptions,
 } from "dataverse-ify/lib/dataverse-ify/DataverseClient/DataverseClient";
 import {
-  Config,
-  CreateRequest,
-  UpdateRequest,
+  type Config,
+  type CreateRequest,
   DynamicsWebApi,
+  type UpdateRequest,
 } from "dynamics-web-api";
 import "dotenv/config";
-import { getAccessToken } from "../utils/dataverse-token";
 import { DATAVERSE_AUTH_FILE } from "../auth/dataverse-auth.setup";
 import { metadataCache } from "../types";
+import { getAccessToken } from "../utils/dataverse-token";
 
 export interface IExtendedDataverseClient extends DataverseClient {
   retrieve<T extends IEntity>(
     entityName: string,
     id: Guid,
     columnSet: string[] | boolean,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ): Promise<T>;
   retrieveMultiple<T extends IEntity>(
     query: string,
     options?: FetchRetrieveMultipleOptions | ODataRetrieveMultipleOptions,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ): Promise<EntityCollection<T>>;
   create(
     entity: IEntity,
-    createOptions?: Omit<CreateRequest, "collection" | "data" | "key">
+    createOptions?: Omit<CreateRequest, "collection" | "data" | "key">,
   ): Promise<string>;
   update(
     entity: IEntity,
-    updateOptions?: Omit<UpdateRequest, "collection" | "data" | "key">
+    updateOptions?: Omit<UpdateRequest, "collection" | "data" | "key">,
   ): Promise<void>;
   executeMultiple<T>(
-    requests: (WebApiExecuteRequest | WebApiExecuteRequest[])[]
+    requests: (WebApiExecuteRequest | WebApiExecuteRequest[])[],
   ): Promise<T[] | undefined>;
   setWebApiConfig(config: Config): void;
 }
@@ -59,10 +59,7 @@ export class ExtendedDataverseClient implements IExtendedDataverseClient {
       serverUrl: process.env.DataverseUrl!,
       useEntityNames: true,
       onTokenRefresh: async () => {
-        const token = await getAccessToken(
-          process.env.DataverseUrl!,
-          DATAVERSE_AUTH_FILE
-        );
+        const token = await getAccessToken(process.env.DataverseUrl!, DATAVERSE_AUTH_FILE);
         return token.token;
       },
     });
@@ -76,32 +73,32 @@ export class ExtendedDataverseClient implements IExtendedDataverseClient {
   async retrieve<T extends IEntity>(
     entityName: string,
     id: Guid,
-    columnSet: string[] | boolean
+    columnSet: string[] | boolean,
   ): Promise<T>;
   async retrieve<T extends IEntity>(
-    entityName: string,
-    id: Guid,
-    columnSet: string[] | boolean,
-    signal?: AbortSignal
+    _entityName: string,
+    _id: Guid,
+    _columnSet: string[] | boolean,
+    _signal?: AbortSignal,
   ): Promise<T> {
     throw new Error("Method not implemented.");
   }
 
   async retrieveMultiple<T extends IEntity>(
     query: string,
-    options?: FetchRetrieveMultipleOptions | ODataRetrieveMultipleOptions
+    options?: FetchRetrieveMultipleOptions | ODataRetrieveMultipleOptions,
   ): Promise<EntityCollection<T>>;
   async retrieveMultiple<T extends IEntity>(
-    query: string,
-    options?: FetchRetrieveMultipleOptions | ODataRetrieveMultipleOptions,
-    signal?: AbortSignal
+    _query: string,
+    _options?: FetchRetrieveMultipleOptions | ODataRetrieveMultipleOptions,
+    _signal?: AbortSignal,
   ): Promise<EntityCollection<T>> {
     throw new Error("Method not implemented.");
   }
 
   async create(
     entity: IEntity,
-    createOptions?: Omit<CreateRequest, "collection" | "data" | "key">
+    createOptions?: Omit<CreateRequest, "collection" | "data" | "key">,
   ): Promise<string> {
     const odata = await odataify("Create", entity);
     const result = await this.webApi.create({
@@ -116,7 +113,7 @@ export class ExtendedDataverseClient implements IExtendedDataverseClient {
   async update(entity: IEntity): Promise<void>;
   async update(
     entity: IEntity,
-    updateOptions?: Omit<UpdateRequest, "collection" | "data" | "key">
+    updateOptions?: Omit<UpdateRequest, "collection" | "data" | "key">,
   ): Promise<void> {
     // Get the primary key attribute
     const entityMetadata = getMetadataByLogicalName(entity.logicalName);
@@ -127,9 +124,7 @@ export class ExtendedDataverseClient implements IExtendedDataverseClient {
     if (!id && entity.id) {
       id = entity.id;
     } else if (!id) {
-      throw new Error(
-        "Either id or the primary id attribute must be set to update the record"
-      );
+      throw new Error("Either id or the primary id attribute must be set to update the record");
     }
 
     // We no longer need special handling of null values since it is now supported to null lookups inside a PATCH
@@ -141,7 +136,7 @@ export class ExtendedDataverseClient implements IExtendedDataverseClient {
         ...updateOptions,
       });
     } catch (ex) {
-      throw new Error("Error during update:" + (ex as Error).message);
+      throw new Error(`Error during update:${(ex as Error).message}`);
     }
   }
 
@@ -163,29 +158,29 @@ export class ExtendedDataverseClient implements IExtendedDataverseClient {
   }
 
   associate(
-    entityName: string,
-    entityId: string,
-    relationship: string,
-    relatedEntities: EntityReference[]
+    _entityName: string,
+    _entityId: string,
+    _relationship: string,
+    _relatedEntities: EntityReference[],
   ): Promise<void> {
     throw new Error("Method not implemented.");
   }
 
   disassociate(
-    entityName: string,
-    entityId: string,
-    relationship: string,
-    relatedEntities: EntityReference[]
+    _entityName: string,
+    _entityId: string,
+    _relationship: string,
+    _relatedEntities: EntityReference[],
   ): Promise<void> {
     throw new Error("Method not implemented.");
   }
 
-  execute<T>(request: WebApiExecuteRequest): Promise<T | undefined> {
+  execute<T>(_request: WebApiExecuteRequest): Promise<T | undefined> {
     throw new Error("Method not implemented.");
   }
 
   executeMultiple<T>(
-    requests: (WebApiExecuteRequest | WebApiExecuteRequest[])[]
+    _requests: (WebApiExecuteRequest | WebApiExecuteRequest[])[],
   ): Promise<T[] | undefined> {
     throw new Error("Method not implemented.");
   }

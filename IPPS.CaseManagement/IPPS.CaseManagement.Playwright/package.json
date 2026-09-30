@@ -2,7 +2,7 @@
   "name": "ipps.casemanagement.playwright",
   "version": "1.0.0",
   "description": "Playwright tests are used to test the UI of Model Driven Apps.",
-  "main": "index.js",  
+  "main": "index.js",
   "scripts": {
     "test:e2e": "playwright test --project=dev",
     "test:e2e:headed": "playwright test --headed --project=dev",
@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@biomejs/biome": "2.5.14",
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.2",
     "@types/xrm": "^9.0.97"
