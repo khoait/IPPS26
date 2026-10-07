@@ -11,7 +11,7 @@
     "test:e2e:regression": "playwright test --project=regression",
     "test:e2e:full": "playwright test --project=full",
     "regen": "npx dataverse-gen@2",
-    "regen:auth": "npx dataverse-auth@2 org5ee27481.crm4.dynamics.com"
+    "regen:auth": "npx dataverse-auth@2 orgcfcdf497.crm3.dynamics.com"
   },
   "keywords": [],
   "author": "",

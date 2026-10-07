@@ -21,8 +21,8 @@ import {
   type UpdateRequest,
 } from "dynamics-web-api";
 import "dotenv/config";
-import { DATAVERSE_AUTH_FILE } from "../auth/dataverse-auth.setup";
 import { metadataCache } from "../types";
+import { DATAVERSE_AUTH_FILE } from "../utils/constants";
 import { getAccessToken } from "../utils/dataverse-token";
 
 export interface IExtendedDataverseClient extends DataverseClient {

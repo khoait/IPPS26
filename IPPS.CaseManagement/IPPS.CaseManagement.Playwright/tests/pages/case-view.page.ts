@@ -31,9 +31,11 @@ export class CaseViewPage {
   }
 
   caseRowByCaseNumber(caseNumber: string): Locator {
-    return this.page.locator(
-      `div[role="gridcell"][col-id="${ipps_caseAttributes.ipps_casenumber}"] label[aria-label*="${caseNumber}"]`,
-    );
+    return this.page
+      .locator(
+        `div[role="gridcell"][col-id="${ipps_caseAttributes.ipps_casenumber}"] label[aria-label*="${caseNumber}"]`,
+      )
+      .first();
   }
 
   async newCase() {

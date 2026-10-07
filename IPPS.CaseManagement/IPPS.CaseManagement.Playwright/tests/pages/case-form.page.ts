@@ -4,6 +4,8 @@ import { getNavigationUrl, type XrmNavigationPageInputEntityRecord } from "../ut
 
 export class CaseFormPage {
   readonly saveButton: Locator;
+  readonly markAsResolvedButton: Locator;
+  readonly confirmDialogButton: Locator;
   readonly caseNumberField: Locator;
   readonly caseTitleField: Locator;
   readonly caseDescriptionField: Locator;
@@ -17,6 +19,8 @@ export class CaseFormPage {
     private baseUrl: string,
   ) {
     this.saveButton = page.locator('button[data-id$="ipps_case.Save"]');
+    this.markAsResolvedButton = page.locator('button[data-id$="ipps_case.MarkAsResolved.Button"]');
+    this.confirmDialogButton = page.locator('button[data-id="confirmButton"]');
     this.caseNumberField = page.locator(
       `div[data-id="${ipps_caseAttributes.ipps_casenumber}"] input`,
     );
@@ -34,7 +38,7 @@ export class CaseFormPage {
       `div[data-id="${ipps_caseAttributes.ipps_assignedto}"] input`,
     );
     this.resolutionField = page.locator(
-      `div[data-id="${ipps_caseAttributes.ipps_resolution}"] input`,
+      `div[data-id="${ipps_caseAttributes.ipps_resolution}"] textarea`,
     );
   }
 
@@ -63,7 +67,7 @@ export class CaseFormPage {
 
   async setCustomer(customer: string) {
     await this.customerField.fill(customer);
-    await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(3000);
     await this.customerField.focus();
     await this.customerField.press("Enter");
   }
@@ -87,7 +91,39 @@ export class CaseFormPage {
     await this.page.waitForTimeout(2000);
   }
 
+  async clickMarkAsResolved() {
+    await this.markAsResolvedButton.click();
+    await this.page.waitForTimeout(2000);
+  }
+
+  async clickConfirmDialog() {
+    await this.confirmDialogButton.click();
+    await this.page.waitForTimeout(2000);
+  }
+
+  getCaseTitleField() {
+    return this.caseTitleField;
+  }
+
   getCaseNumberField() {
     return this.caseNumberField;
+  }
+
+  getCustomerField() {
+    return this.customerField.or(
+      this.page.locator(`div[data-id="${ipps_caseAttributes.ipps_customerid}"] ul`),
+    );
+  }
+
+  getFieldError(fieldName: ipps_caseAttributes) {
+    return this.page.locator(`div[data-id="${fieldName}"] [data-id$="error-message"]`);
+  }
+
+  getStatusReasonHeader() {
+    return this.page.locator(`[data-name="header_statuscode"]`);
+  }
+
+  getDialogTitle() {
+    return this.page.locator(`[data-id="dialogTitleText"]`);
   }
 }

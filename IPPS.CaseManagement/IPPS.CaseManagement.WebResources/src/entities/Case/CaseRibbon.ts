@@ -1,6 +1,6 @@
 import { ipps_case_ipps_case_statuscode, ipps_caseAttributes } from "../../types";
 
-export function MarkAsResolvedCommandHandler(formContext: Xrm.FormContext) {
+export async function MarkAsResolvedCommandHandler(formContext: Xrm.FormContext) {
   const status = formContext
     .getAttribute<Xrm.Attributes.OptionSetAttribute>(ipps_caseAttributes.statuscode)
     ?.getValue();
@@ -12,6 +12,8 @@ export function MarkAsResolvedCommandHandler(formContext: Xrm.FormContext) {
   ) {
     return;
   }
+
+  await formContext.data.save();
 
   const assignedTo = formContext
     .getAttribute<Xrm.Attributes.LookupAttribute>(ipps_caseAttributes.ipps_assignedto)
@@ -27,6 +29,15 @@ export function MarkAsResolvedCommandHandler(formContext: Xrm.FormContext) {
       title: "Resolve Case",
       text: "Assigned To and Resolution are required before marking the case as resolved.",
     });
+    return;
+  }
+
+  const confirm = await Xrm.Navigation.openConfirmDialog({
+    title: "Resolve Case",
+    text: "Are you sure you want to mark this case as resolved?",
+  });
+
+  if (!confirm.confirmed) {
     return;
   }
 

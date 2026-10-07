@@ -51,10 +51,7 @@ export type XrmNavigationPageInput =
   | XrmNavigationPageInputHtmlWebResource
   | XrmNavigationDashboard;
 
-export function getNavigationUrl(
-  baseUrl: string,
-  pageInput: XrmNavigationPageInput
-): string {
+export function getNavigationUrl(baseUrl: string, pageInput: XrmNavigationPageInput): string {
   const url = new URL("main.aspx", baseUrl);
   if (pageInput) {
     for (const [key, value] of Object.entries(pageInput)) {

@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { ClientSecretCredential } from "@azure/identity";
 import "dotenv/config";
 
@@ -11,10 +11,9 @@ export type AccessToken = {
 export async function getAccessToken(baseURL: string, cacheFilePath: string) {
   const cachedToken = getCachedAccessToken(cacheFilePath);
   if (cachedToken && isTokenValid(cachedToken.expiresOn)) {
-    console.log("Using cached token for Dataverse API");
     return cachedToken;
   }
-  console.log("Fetching new token for Dataverse API");
+
   const token = await getNewAccessToken(baseURL);
   fs.mkdirSync(path.dirname(cacheFilePath), { recursive: true });
   fs.writeFileSync(cacheFilePath, JSON.stringify(token));
@@ -25,7 +24,7 @@ async function getNewAccessToken(baseURL: string) {
   const credential = new ClientSecretCredential(
     process.env.TenantId!,
     process.env.ClientId!,
-    process.env.ClientSecret!
+    process.env.ClientSecret!,
   );
 
   const scopeUrl = new URL(".default", baseURL);

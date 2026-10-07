@@ -1,8 +1,6 @@
 import { test as setup } from "@playwright/test";
 import "dotenv/config";
-import path from "node:path";
-
-const USER_AUTH_FILE = path.join(__dirname, "../../playwright/.auth/user.json");
+import { USER_AUTH_FILE } from "../utils/constants";
 
 setup("authenticate", async ({ page, baseURL }) => {
   // Perform authentication steps. Replace these actions with your own.
