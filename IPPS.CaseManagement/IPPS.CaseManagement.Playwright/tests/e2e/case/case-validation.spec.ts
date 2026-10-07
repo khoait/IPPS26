@@ -13,7 +13,6 @@ test.describe("case validation", { tag: ["@smoke"] }, () => {
     await caseView.newCase();
 
     await caseForm.setCustomer("John Doe");
-    await caseForm.setPriority("Low");
     await caseForm.setDescription("Test empty title");
     await caseForm.save();
 
@@ -29,7 +28,6 @@ test.describe("case validation", { tag: ["@smoke"] }, () => {
     await caseView.newCase();
 
     await caseForm.setTitle("Test");
-    await caseForm.setPriority("Low");
     await caseForm.setDescription("Test empty customer");
     await caseForm.save();
 

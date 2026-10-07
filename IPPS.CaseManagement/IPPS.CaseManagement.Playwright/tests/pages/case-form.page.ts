@@ -74,8 +74,8 @@ export class CaseFormPage {
 
   async setPriority(priority: string) {
     await this.priorityField.click();
-    const dropdownId = await this.priorityField.getAttribute("aria-controls");
-    await this.page.locator(`#${dropdownId} [role="option"]`, { hasText: priority }).click();
+    await this.page.waitForTimeout(100);
+    await this.page.getByRole("option", { name: priority }).click();
   }
 
   async setAssignedTo(assignedTo: string) {

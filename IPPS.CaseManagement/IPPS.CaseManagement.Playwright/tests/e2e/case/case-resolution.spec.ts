@@ -21,7 +21,6 @@ test.describe("case resolution", { tag: ["@full"] }, () => {
     await caseForm.clickConfirmDialog();
 
     const statusHeader = caseForm.getStatusReasonHeader();
-    console.log("Status Header Text: ", await statusHeader.textContent());
     await expect(statusHeader).toContainText("Resolved");
   });
 

@@ -14,7 +14,6 @@ test.describe("core functionality", { tag: ["@regression"] }, () => {
 
     await caseForm.setTitle("Unable to access application");
     await caseForm.setCustomer("John Doe");
-    await caseForm.setPriority("Low");
     await caseForm.setDescription("User is unable to access the application.");
     await caseForm.save();
 
