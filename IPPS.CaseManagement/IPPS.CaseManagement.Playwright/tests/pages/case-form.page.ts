@@ -67,7 +67,9 @@ export class CaseFormPage {
 
   async setCustomer(customer: string) {
     await this.customerField.fill(customer);
-    await this.page.waitForTimeout(3000);
+    const dropdown = this.page.getByLabel("Customer Lookup results");
+    await dropdown.waitFor({ state: "visible" });
+    await this.page.waitForTimeout(4000);
     await this.customerField.focus();
     await this.customerField.press("Enter");
   }
@@ -75,7 +77,9 @@ export class CaseFormPage {
   async setPriority(priority: string) {
     await this.priorityField.click();
     await this.page.waitForTimeout(100);
-    await this.page.getByRole("option", { name: priority }).click();
+    const listbox = this.page.getByRole("listbox");
+    await listbox.waitFor({ state: "visible" });
+    await listbox.getByRole("option", { name: priority }).click();
   }
 
   async setAssignedTo(assignedTo: string) {

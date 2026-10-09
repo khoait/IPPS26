@@ -8,7 +8,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node", "@playwright/test", "types"],
+    "types": ["node", "@playwright/test"],
     "paths": {
       "@fixtures/*": ["./tests/fixtures/*"],
       "@pages/*": ["./tests/pages/*"]
